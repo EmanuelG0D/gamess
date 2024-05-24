@@ -1,0 +1,40 @@
+.header {
+    background: rgb(238,174,202);
+background: -moz-radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+background: -webkit-radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endColorstr="#94bbe9",GradientType=1);
+    color: white; 
+    padding: 60px;
+}
+
+.search-bar {
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.search-bar[type="text"] {
+    padding: 8px;
+    width: 200px; /* Ajusta el ancho según sea necesario */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+ 
+}
+
+.header {
+    display: flex;
+   
+    align-items: center; /* Esto centrará verticalmente los elementos */
+}
+
+.btn-primary{
+margin-left: 50px;
+}
+
+
+
+
+
+
