@@ -89,6 +89,11 @@ export class ProductoService {
   }
 
 
+  getById(id:number):Observable<ProductoInterface>{
+    return this._http.get<ProductoInterface>(
+      `https://api.escuelajs.co/api/v1/products/${id}`,{}
+    )
+  }
 
 
 

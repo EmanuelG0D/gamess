@@ -15,14 +15,14 @@ import { ProductoService } from '../../services/http/producto.service';
 export class GamesComponent implements OnInit {
 
   games: ProductoInterface[] = [];
-  categories: CategoryInterface  [] = [];
+  categories: CategoryInterface[] = [];
   searchInput: string = '';
 
   public gamesService = inject(ProductoService);
   public route = inject(Router);
 
-  
-  search(){
+
+  search() {
     this.gamesService.getsearch(this.searchInput).subscribe((rest: ProductoInterface[]) => {
       this.games = rest;
     });
@@ -45,40 +45,88 @@ export class GamesComponent implements OnInit {
     });
   }
 
-  salir(){
+  salir() {
     localStorage.removeItem("token");
     this.route.navigateByUrl("/login");
   }
 
-  deleteGames(id:number){
+  deleteGames(id: number) {
+    //sweet alert seguro de borrar?
     this.gamesService.deleteGames(id).subscribe(
       (rest: boolean) => {
-        console.log("Eliminado correctamente");
+        alert("Eliminado correctamente");
         this.games = this.games.filter(games => games.id !== id);
       }
     )
   }
 
-  nameGamesNew : string = '';
-  priceGamesNew : number = 0.0;
-  descriptionGamesNew: string='';
-  categoryGamesNew: number=0.0;
-  photoGamesNew: string='';
+  nameGamesNew: string = '';
+  priceGamesNew: string = '';
+  descriptionGamesNew: string = '';
+  categoryGamesNew: number = 5;
+  photoGamesNew: string = '';
+
+  addProduct() {
 
 
-  addProduct(){
-  this.gamesService.postProductGames(
-    this.nameGamesNew,
-    this.priceGamesNew,
-    this.descriptionGamesNew,
-    this.categoryGamesNew,
-    [this.photoGamesNew]
-  ).subscribe({
-    next  : (response) =>{
-      this.games.push(response);
+    const regexlink = /^(ftp|http|https):\/\/[^ "]+$/;
+    const regex = /^-?[0-9]+$/;
+
+    if (this.nameGamesNew === "") {
+      alert("El nombre del juego es requerido");
+
+    } else if (this.priceGamesNew === "") {
+      alert("El precio es requerido")
+
+    } else if (!regex.test(this.priceGamesNew)) {
+      alert("El precio no puede contener texto");
+
+    } else if (this.descriptionGamesNew === "") {
+      alert("La descripcion es necesaria")
+
+    } else if (this.photoGamesNew === "") {
+      alert("Agregue fotografía")
+
+    } else if (!regexlink.test(this.photoGamesNew)) {
+      alert("Formato de link incorrecto");
+
     }
-  });
 
 
+    this.gamesService.postProductGames(
+      this.nameGamesNew,
+      Number(this.priceGamesNew),
+      this.descriptionGamesNew,
+      this.categoryGamesNew,
+      [this.photoGamesNew]
+    ).subscribe({
+      next: (response) => {
+        this.games.push(response);
+        alert("Se agrego el juego");
+        this.nameGamesNew = '';
+        this.priceGamesNew = '';
+        this.descriptionGamesNew = '';
+        this.categoryGamesNew = 5;
+        this.photoGamesNew = '';
+      }
+
+    });
+
+  }
+
+  id: number = 0;
+  nameGamesUp: string = 'a';
+  priceGamesUp: string = '';
+  descriptionGamesUp: string = 'a';
+  photoGamesUp: string = 'a';
+
+  shUpdateG(id: number){
+    this.gamesService.getById(id).subscribe(
+      (rest: ProductoInterface) => {
+        this.nameGamesUp = rest.title;
+        this.priceGamesUp = rest.price + '';
+        this.descriptionGamesUp = rest.description;
+        this.photoGamesUp = rest.title;
+    });
   }
 }

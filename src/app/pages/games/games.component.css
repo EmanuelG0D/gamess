@@ -1,3 +1,5 @@
+
+
 .header {
     background: rgb(238,174,202);
 background: -moz-radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
@@ -16,7 +18,7 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endCo
 
 .search-bar[type="text"] {
     padding: 8px;
-    width: 200px; /* Ajusta el ancho según sea necesario */
+    width: 700px; /* Ajusta el ancho según sea necesario */
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -25,16 +27,38 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endCo
 
 .header {
     display: flex;
-   
     align-items: center; /* Esto centrará verticalmente los elementos */
 }
 
-.btn-primary{
-margin-left: 50px;
+
+
+
+.full-hd-image {
+    object-fit: cover;  /* La imagen cubrirá el contenedor, recortando las partes necesarias */
+    object-position: center;  /* Centra la imagen dentro del contenedor */
 }
 
 
 
 
+.title_card{
+    font-size: 20px;
+}
 
+.description_card{
+    font-size: 15px;
+}
 
+.price_card{
+    color: green;
+}
+
+.img__carrusel{
+    height: 500px;
+    object-fit: cover;  /* La imagen cubrirá el contenedor, recortando las partes necesarias */
+    object-position: center;  /* Centra la imagen dentro del contenedor */
+}
+
+.halo{
+    object-position: center;  /* Centra la imagen dentro del contenedor */
+}

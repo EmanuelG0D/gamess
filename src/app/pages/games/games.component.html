@@ -1,63 +1,104 @@
-<header class="header">
-    <div class="search-bar">
-        <input type="text" class="form-control" (ngModelChange)="search()"  [(ngModel)]="searchInput" name="searchInput" id="searchInput" ngModel placeholder="Buscar...">
+<div id="carouselExampleCaptions" class="carousel slide carroso">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
     </div>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        <i class="bi bi-file-earmark-plus"></i> Agregar juego 
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="../assets/img/hollo.jpg" class="d-block w-100 img__carrusel halo" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Hollo Knigth</h5>
+                <p>Nuestro campeon lucha para salvar el universo en aventura de mundo abierto</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../assets/img/blackangel.jpeg" class="d-block w-100 img__carrusel" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Call of Duty</h5>
+                <p>Combate epico, gráficos impactantes y estrategias tacticas en escenarios globales</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="../assets/img/fall.jpeg" class="d-block w-100 img__carrusel" alt="...">
+            <div class="carousel-caption d-none d-md-block">
+                <h5>Fall Guys</h5>
+                <p>Diviertete solo o con muchas personas en linea!!</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
     </button>
-    <button type="button" class="m-3 btn btn-danger" (click)="salir()" >
-       Salir
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
     </button>
-</header>
-
- 
+</div>
 
 
-<div class="container mt-5" >
-    
-    <table class="table table-striped mt-5" >
-    <thead >
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">FOTO</th>
-        <th scope="col">NOMBRE</th>
-        <th scope="col">DESCIPCION</th>
-        <th scope="col">PRECIO</th>
-        <th scope="col">CATEGORIA</th>
-      </tr>
-    </thead>
-    <tbody>
-    @for (item of games; track $index) {
-        <tr class="text-center row__style">
-            <td scope="row"> {{item.id}}</td>
-            <td> <img [ngSrc]="item.images[0]" alt="" width="50" height="50"></td>
-            <td> {{item.title}}</td>
-            <td class="text-start"> {{item.description}}</td>
-            <td> {{item.price}}</td>
-            <td> {{item.category.name}}</td>
-            <td>
-                <div class="d-flex justify-content-center">
-                    <button type="button" class="btn btn-warning me-2"><i class="bi bi-pencil"></i></button>
+
+
+
+
+
+
+<div class="container  mt-5 mb-5">
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <i class="bi bi-file-earmark-plus"></i> Agregar juego
+        </button>
+        <div class="search-bar">
+            <input type="text" class="form-control search-bar" (ngModelChange)="search()" [(ngModel)]="searchInput"
+                name="searchInput" id="searchInput" ngModel placeholder="Buscar...">
+        </div>
+
+        <button type="button" class="m-3 btn btn-danger" (click)="salir()">
+            Salir
+        </button>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-3">
+        @for (item of games; track $index) {
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <img [ngSrc]="item.images[0]" width="100" height="230" class="card-img-top full-hd-image" alt="...">
+                <div class="card-body">
+                    <h4 class="title_card">{{item.title}}</h4>
+                    <p class="description_card">{{item.description}}</p>
+                    <p class="price_card">{{item.price}}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+
+                            <button type="button" class="btn btn-warning me-2" data-bs-toggle="modal" (click)="shUpdateG(item.id)"
+                                data-bs-target="#updateM">
+                                Editar <i class="bi bi-file-earmark-plus"></i>
+                            </button>
 
                             <button type="button" class="btn btn-danger me-2" (click)="deleteGames(item.id)">
-                                <i class="bi bi-file-earmark-x"></i>
-                                
+                                Eliminar <i class="bi bi-file-earmark-x"></i>
+
                             </button>
+
+                        </div>
+
+                    </div>
                 </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
 
-            </td>
-        </tr>
-    }
-    </tbody>
-  </table></div>
- 
-
-
-
- 
-
-
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<!--MODAL ADD-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
@@ -70,14 +111,14 @@
 
                     <div class="mb-3">
                         <label for="nameGamesNew" class="form-label">Nombre</label>
-                        <input type="text" [(ngModel)]="nameGamesNew" name="nameGamesNew" class="form-control" id="nameGamesNew"
-                            placeholder="Nombre del juego">
+                        <input type="text" [(ngModel)]="nameGamesNew" name="nameGamesNew" class="form-control"
+                            id="nameGamesNew" placeholder="Nombre del juego">
                     </div>
 
                     <div class="mb-3">
                         <label for="priceGamesNew" class="form-label">Precio</label>
-                        <input type="number" [(ngModel)]="priceGamesNew" name="priceGamesNew" class="form-control" id="priceGamesNew"
-                            placeholder="Precio del juego">
+                        <input type="text" [(ngModel)]="priceGamesNew" name="priceGamesNew" class="form-control"
+                            id="priceGamesNew" placeholder="Precio del juego">
                     </div>
 
                     <div class="mb-3">
@@ -89,28 +130,77 @@
                         </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label for="categoryGamesNew">Categoria</label>
-                        <select class="form-select" [(ngModel)]="categoryGamesNew" name="categoryGamesNew"
-                            aria-label="Default select example" id="categoryGamesNew">
-                            @for (category of categories; track $index) {
-                            <option value="{{category.id}}">{{category.name}}</option>
 
-                            }
-                        </select>
-                    </div>
 
                     <div class="mb-3">
-                        <label for="photo" class="form-label">Fotografia</label>
-                        <input type="url" [(ngModel)]="photoGamesNew" name="photoGamesNew" class="form-control" id="photoGamesNew"
-                            placeholder="https://imagen.png">
+                        <label for="photo" class="form-label">Imagen</label>
+                        <input type="url" [(ngModel)]="photoGamesNew" name="photoGamesNew" class="form-control"
+                            id="photoGamesNew" placeholder="https://imagen.png">
                     </div>
                 </div>
-                <div class="modal-footer">                    
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-success"><i class="bi bi-floppy-fill"></i> Guardar</button>
                 </div>
             </form>
         </div>
-
     </div>
 </div>
+
+    <!--MODAL UP-->
+    <div class="modal fade" id="updateM" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog  modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Editar juego</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form (ngSubmit)="addProduct()">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="nameGamesNew" class="form-label">Nombre</label>
+                            <input type="text" [(ngModel)]="nameGamesUp" name="nameGamesNew" class="form-control"
+                                id="nameGamesNew" placeholder="Nombre del juego">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="priceGamesNew" class="form-label">Precio</label>
+                            <input type="text" [(ngModel)]="priceGamesUp" name="priceGamesNew" class="form-control"
+                                id="priceGamesNew" placeholder="Precio del juego">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="descriptionGamesNew" class="form-label">Descripcion</label>
+                            <div class="form-floating">
+                                <textarea class="form-control" [(ngModel)]="descriptionGamesUp"
+                                    name="descriptionGamesNew" placeholder="Leave a comment here"
+                                    id="descriptionGamesNew"></textarea>
+                                <label for="descriptionGamesNew">Descripcion</label>
+                            </div>
+                        </div>
+
+
+
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Imagen</label>
+                            <input type="url" [(ngModel)]="photoGamesUp" name="photoGamesNew" class="form-control"
+                                id="photoGamesNew" placeholder="https://imagen.png">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success"><i class="bi bi-floppy-fill"></i> Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
